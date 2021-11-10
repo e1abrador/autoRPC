@@ -36,10 +36,6 @@ echo -ne "${greenColour}└─────► " && read auth_ip
 echo -e "${endColour}"
 clear
 
-# Tiffany.Molina
-# NewIntelligenceCorpUser9876
-# 10.10.10.248
-
 rpcclient -U $auth_username%$auth_password $auth_ip -c "enumdomusers" | sed 's/user:// ' | tr -d '[]' | awk '{print $1}' > /tmp/user
 for authenticated_rid in $(cat /tmp/user);do
 echo -e "\t---------------------------------------------" && rpcclient -U $auth_username%$auth_password $auth_ip -c "queryuser $authenticated_rid" | grep -E "Description|User Name" && echo -e "\t---------------------------------------------\n"; done
